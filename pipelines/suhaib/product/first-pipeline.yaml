@@ -1,0 +1,13 @@
+name: "My First DAG"
+type: AIRFLOW_DAG
+version: 1.0.0
+
+owners:
+  - name: "Suhaib Shah"
+    email: "suhaibshah22@gmail.com"
+
+steps:
+  - name: "Extract"
+    ins:
+      - type: POSTGRES
+        host: "1.1.1.1.db.com"
