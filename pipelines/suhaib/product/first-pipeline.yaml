@@ -1,13 +1,27 @@
-name: "My First DAG"
-type: AIRFLOW_DAG
-version: 1.0.0
+pipeline:
+  name: "pg_to_snowflake_ingest"
+  version: "1.0.0"
+  domain: "data-platform"
+  description: "Extract some data and load some data"
 
-owners:
-  - name: "Suhaib Shah"
-    email: "suhaibshah22@gmail.com"
+  schedule:
+    type: "cron"
+    expression: "0 3 * * *" #daily at 3 AM
 
-steps:
-  - name: "Extract"
-    ins:
-      - type: POSTGRES
-        host: "1.1.1.1.db.com"
+  steps:
+    - name: "extract-and-load"
+      type: "ingestion"
+      description: "Extract from Postgres, load into Snowflake"
+      inputs:
+        - name: "postgres-source"
+          type: "postgres"
+          host: "subscription-db.exampled.com"
+          database: "subscriptions"
+          table: "user_subscriptions"
+      outputs:
+        - name: "snowflake-dest"
+          type: "snowflake"
+          table_name: "analytics.user_subscriptions"
+
+resources:
+  compute_cluster: "data-platform-default-cluster"
