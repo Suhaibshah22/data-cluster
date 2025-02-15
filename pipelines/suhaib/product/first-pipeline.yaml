@@ -1,6 +1,6 @@
 pipeline:
   name: "pg_to_snowflake_ingest"
-  version: "1.0.0"
+  version: "v1.0"
   domain: "data-platform"
   description: "Extract some data and load some data"
 
