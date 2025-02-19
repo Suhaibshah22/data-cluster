@@ -6,7 +6,7 @@ pipeline:
 
   schedule:
     type: "cron"
-    expression: "0 3 * * *" #daily at 3 AM
+    expression: "0 4 * * *" #daily at 4 AM
 
   steps:
     - name: "extract-and-load"
